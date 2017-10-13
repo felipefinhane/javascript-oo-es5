@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+        <p>OOP JavaScript</p>
+        <script type="text/javascript">
+            function Person(_name = '', _age = '', _height = '') {
+                var name = _name ;
+                var age = _age;
+                var height = _height;
+
+                function privateFunc() {
+                    console.log('TESTE');
+                }
+
+                this.initialize = function(){
+                    console.log('Init function');
+                }
+
+                this.sayHello = function(_name) {
+                    console.log("Hello " + _name + "!");
+                }
+
+                this.getName = function() {
+                    return name;
+                }
+
+                this.setName = function(_name) {
+                    privateFunc();
+                    name = _name;
+                }
+                
+                this.getAge = function() {
+                    return age;
+                }
+
+                this.setAge = function(_age) {
+                    age = _age;
+                }
+
+                this.getHeight = function() {
+                    return height;
+                }
+
+                this.setHeight = function(_height) {
+                    height = _height;
+                }
+            }
+
+            function Employee(_name = '', _age = '', _height ='', _salary = '') {
+                var salary =_salary;
+
+                Person.call(this, _name, _age, _height);
+
+                this.getSalary = function() {
+                    return salary;
+                }
+                this.setSalary = function(_salary) {
+                    salary = _salary;
+                }
+            }
+            Employee.prototype = Object.create(Person.prototype);
+
+            Person.static_method = function() {
+                console.log('This is my first static method');
+            }
+            
+            Person.static_method();
+            Person.static_attr = 'my_first_attr_static';
+            console.log(Person.static_attr);
+            
+            Person.prototype.myProtoFunc = function() {
+                console.log('First prototype function!');
+            }
+
+            Person.prototype.happyBirthday = function () {
+                this.setAge(this.getAge() + 1);
+            }
+            
+            var felipe = new Person();
+            felipe.initialize();
+            felipe.setName('Felipe');
+            felipe.setAge(32);
+            felipe.setHeight(1.86);
+            felipe.sayHello(felipe.getName());
+            felipe.happyBirthday();
+            
+
+            var romeu = new Person('Romeu', 54, 1.69);
+            romeu.sayHello(romeu.getName());
+            console.log(romeu);
+            
+            console.log(felipe);
+            console.log(felipe.__proto__);
+            console.log(Person.prototype);
+
+            var jose = new Employee('Jose', 45, 1.88, 2500.00);
+            console.log(jose.getAge());
+            jose.happyBirthday();
+            console.log(jose.getAge());
+            
+
+
+        </script>
+    </body>
+</html>
